@@ -3,7 +3,11 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
 
+import userRouter from './routes/userRoute.js';
+
 const app = express();
+
+app.use('/server/user', userRouter);
 
 mongoose
   .connect(process.env.MONGO)
