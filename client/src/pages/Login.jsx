@@ -7,6 +7,7 @@ import {
   loginSuccess,
   loginFailure,
 } from '../redux/user/userSlice';
+import OAuth from '../components/OAuth';
 
 const Login = () => {
   const { loading, error } = useSelector((state) => state.user);
@@ -127,9 +128,7 @@ const Login = () => {
 
           <div className="pt-5">
             <div className="flex flex-col justify-center md:flex-row md:justify-end">
-              <button className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm md:text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
-                Continuar con Google
-              </button>
+              <OAuth />
               <button
                 disabled={loading}
                 className="mt-3 ml-0 md:mt-0 md:ml-3 justify-center py-2 px-4 border border-transparent shadow-sm text-sm md:text-base font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none"
