@@ -4,11 +4,13 @@ import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import NotFound from './pages/NotFound';
+import Nav from './components/Nav';
 
 function App() {
   return (
     <>
       <BrowserRouter>
+        <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/iniciar-sesion" element={<Login />} />
