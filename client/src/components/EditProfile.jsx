@@ -37,7 +37,7 @@ const EditProfile = () => {
   return (
     <main className="flex-1 py-8">
       <div className="px-4 sm:px-6 lg:px-8 lg:max-w-6xl lg:mx-auto">
-        <form className="space-y-8 divide-y divide-gray-200">
+        <form className="space-y-8">
           <div>
             <div>
               <h3 className="text-lg leading-6 font-medium text-gray-900">
