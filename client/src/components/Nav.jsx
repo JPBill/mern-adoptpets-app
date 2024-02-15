@@ -1,7 +1,12 @@
 import { Fragment, useState } from 'react';
 import { Dialog, Menu, Transition } from '@headlessui/react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import {
+  logOutUserStart,
+  deleteUserSuccess,
+  deleteUserFailure,
+} from '../redux/user/userSlice';
 import {
   ChevronDownIcon,
   HeartIcon,
@@ -33,6 +38,22 @@ const Nav = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  const handleLogOut = async () => {
+    try {
+      dispatch(logOutUserStart());
+      const res = await fetch('/server/auth/logout');
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
 
   return (
     <div className="min-h-full">
@@ -278,7 +299,9 @@ const Nav = () => {
                               'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
-                            <button>Cerrar sesión</button>
+                            <button onClick={handleLogOut}>
+                              Cerrar sesión
+                            </button>
                           </div>
                         )}
                       </Menu.Item>
