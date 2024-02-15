@@ -1,10 +1,34 @@
 import { useState } from 'react';
 import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  deleteUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+} from '../redux/user/userSlice';
 
 const EditProfile = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [showPassword, setShowPassword] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const handleDeleteUser = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/server/user/delete/${currentUser._id}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
 
   const handlePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -91,8 +115,14 @@ const EditProfile = () => {
           </div>
 
           <div className="pt-5">
-            <div className="flex justify-center md:justify-end">
-              <button className="w-full justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 md:w-[20%] hover:bg-cyan-700 focus:outline-none">
+            <div className="flex flex-col justify-center md:flex-row md:justify-end">
+              <button
+                onClick={handleDeleteUser}
+                className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
+              >
+                Eliminar cuenta
+              </button>
+              <button className="mt-4 ml-0 md:mt-0 md:ml-3 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none">
                 Guardar cambios
               </button>
             </div>
