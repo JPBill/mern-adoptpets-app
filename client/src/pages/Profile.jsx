@@ -15,6 +15,25 @@ const Profile = () => {
   const [userListings, setUserListings] = useState([]);
   const [greeting, setGreeting] = useState('');
 
+  const handleListingDelete = async (listingId) => {
+    try {
+      const res = await fetch(`/server/listing/delete/${listingId}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+
+      setUserListings((prev) =>
+        prev.filter((listing) => listing._id !== listingId)
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   const handleShowListings = useCallback(async () => {
     try {
       setShowListingsError(false);
@@ -220,7 +239,13 @@ const Profile = () => {
                                         'block px-4 py-2 text-sm cursor-pointer'
                                       )}
                                     >
-                                      <button>Eliminar</button>
+                                      <button
+                                        onClick={() =>
+                                          handleListingDelete(animal._id)
+                                        }
+                                      >
+                                        Eliminar
+                                      </button>
                                     </div>
                                   )}
                                 </Menu.Item>
