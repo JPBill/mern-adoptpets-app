@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import NotFound from './pages/NotFound';
 import PrivateRoute from './pages/PrivateRoute';
 import AddPet from './pages/AddPet';
+import EditListing from './pages/EditListing';
 import Nav from './components/Nav';
 
 function App() {
@@ -20,6 +21,10 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route path="/mi-cuenta" element={<Profile />} />
             <Route path="/añadir-mascota" element={<AddPet />} />
+            <Route
+              path="/editar-publicacion/:listingId"
+              element={<EditListing />}
+            />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

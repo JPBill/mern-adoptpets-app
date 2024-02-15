@@ -217,7 +217,8 @@ const Profile = () => {
                               <div className="py-1">
                                 <Menu.Item>
                                   {({ active }) => (
-                                    <div
+                                    <Link
+                                      to={`/editar-publicacion/${animal._id}`}
                                       className={classNames(
                                         active
                                           ? 'bg-gray-100 text-gray-900'
@@ -225,8 +226,8 @@ const Profile = () => {
                                         'block px-4 py-2 text-sm cursor-pointer'
                                       )}
                                     >
-                                      <button>Editar</button>
-                                    </div>
+                                      Editar
+                                    </Link>
                                   )}
                                 </Menu.Item>
                                 <Menu.Item>
