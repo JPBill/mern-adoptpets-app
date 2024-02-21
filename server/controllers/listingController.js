@@ -56,6 +56,8 @@ export const getListing = async (req, res, next) => {
     if (!listing) {
       return next(errorHandler(404, 'Listado no encontrado.'));
     }
+    listing.views += 1;
+    await listing.save();
     res.status(200).json(listing);
   } catch (error) {
     next(error);

@@ -211,6 +211,20 @@ const EditListing = () => {
                       id="category"
                       name="category"
                       type="radio"
+                      value="conejo"
+                      checked={formData.category === 'conejo'}
+                      onChange={handleChange}
+                      className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                    />
+                    <span className="ml-3 block text-sm font-medium text-gray-700">
+                      Conejo/a
+                    </span>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      id="category"
+                      name="category"
+                      type="radio"
                       value="otro"
                       checked={formData.category === 'otro'}
                       onChange={handleChange}

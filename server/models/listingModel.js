@@ -18,6 +18,7 @@ const listingSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    views: { type: Number, default: 0 },
     userRef: {
       type: String,
       required: true,
